@@ -16,7 +16,7 @@ get "/movies_result" do
 
   @mov_name = params[:mov_name]
   @title = Movies.find_by_title(@mov_name).title
-  @rating = Movies.find_by_title(@mov_name).rating
+  @rating = Movies.find_by_title(@mov_name).rating #this is not yet working...
   @director = Movies.find_by_title(@mov_name).director
   @runtime = Movies.find_by_title(@mov_name).runtime
   @year = Movies.find_by_title(@mov_name).year
