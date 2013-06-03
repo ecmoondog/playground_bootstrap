@@ -12,7 +12,7 @@ get "/movies" do
   erb :movies
 end
 
-get "/movies_result" do
+post "/movies_result" do
 
   @mov_name = params[:mov_name]
   @title = Movies.find_by_title(@mov_name).title
@@ -31,7 +31,7 @@ get "/stocks" do
   erb :stocks
 end
 
-get "/stocks_result" do
+post "/stocks_result" do
   begin
     @stock_name = params[:stock_name]
     @company = StockQuote::Stock.quote(@stock_name).company
@@ -57,7 +57,7 @@ get "/images_result" do
     erb :images_result
 end
 
-get "/random_result" do
+post "/random_result" do
     params[:img_random]
     suckr = ImageSuckr::GoogleSuckr.new 
     arr = ["car", "dog", "cat", "lake", "jump", "hurdle", "skyscraper", "luge", "tree", "scatter", "artist", "paint"] 
