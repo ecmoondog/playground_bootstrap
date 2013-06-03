@@ -5,6 +5,8 @@
   <button>Show me the Image!</button>
 </form>
 
-<form action="/images_result" method="get">
-  <input type="submit" name="img_random" value="Show me a random number Instead!">
+
+<form action="/random_result" method="get">
+  <input type="hidden" name="img_random" value="<%= @img_random %>">
+  <button>Show a random one instead!</button>
 </form>

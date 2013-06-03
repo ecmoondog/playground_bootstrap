@@ -51,16 +51,17 @@ get "/images" do
 end
 
 get "/images_result" do
-  if 
     @img_name = params[:img_name]
     suckr = ImageSuckr::GoogleSuckr.new 
     @photo = suckr.get_image_url({"q" => @img_name})
-  else
-    suckr = ImageSuckr::GoogleSuckr.new
-    @photo = suckr.get_image_url
-  end
-
-  erb :images_result
+    erb :images_result
 end
 
-
+get "/random_result" do
+    params[:img_random]
+    suckr = ImageSuckr::GoogleSuckr.new 
+    arr = ["car", "dog", "cat", "lake", "jump", "hurdle", "skyscraper", "luge", "tree", "scatter", "artist", "paint"] 
+    @img_random = arr.sample
+    @rand_photo = suckr.get_image_url({"q" => @img_random})
+    erb :random_result
+end
