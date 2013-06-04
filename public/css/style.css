@@ -1,0 +1,24 @@
+body {
+  background-image:url(/img/dark_blue_back.jpg);
+  text-align: center;
+  color: white;
+}
+
+#banner_head {
+  padding: 10px;
+}
+
+#container {
+  height: auto;
+  background-color: black;
+  padding: 30px;
+}
+
+footer {
+  clear: both;
+}
+
+img{
+  height: 200px;
+  width: auto;
+}
