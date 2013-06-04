@@ -13,17 +13,23 @@ get "/movies" do
 end
 
 post "/movies_result" do
-
-  @mov_name = params[:mov_name]
-  @title = Movies.find_by_title(@mov_name).title
-  @rating = Movies.find_by_title(@mov_name).rating #this is not yet working...
-  @director = Movies.find_by_title(@mov_name).director
-  @runtime = Movies.find_by_title(@mov_name).runtime
-  @year = Movies.find_by_title(@mov_name).year
-  suckr = ImageSuckr::GoogleSuckr.new 
-  @poster = suckr.get_image_url({"q" => @mov_name})
-
-
+  begin
+    movie = Movies.find_by_title(params[:mov_name])
+    if
+      movie.title.nil?
+      puts "This is not a valid movie"
+      erb :movies
+    else
+      @mov_name = params[:mov_name]
+      @title = Movies.find_by_title(@mov_name).title
+      @rating = Movies.find_by_title(@mov_name).rating #this is not yet working...
+      @director = Movies.find_by_title(@mov_name).director
+      @runtime = Movies.find_by_title(@mov_name).runtime
+      @year = Movies.find_by_title(@mov_name).year
+      suckr = ImageSuckr::GoogleSuckr.new 
+      @poster = suckr.get_image_url({"q" => @mov_name})
+    end
+  end
   erb :movies_result
 end
 
