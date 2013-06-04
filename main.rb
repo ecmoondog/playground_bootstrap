@@ -5,10 +5,12 @@ require "stock_quote"
 require "image_suckr"
 
 get "/" do
+  @current_page = "/"
   erb :index
 end
 
 get "/movies" do
+  @current_page = "movies"
   erb :movies
 end
 
@@ -18,6 +20,7 @@ post "/movies_result" do
     if
       movie.title.nil?
       puts "This is not a valid movie"
+      @current_page = "movies"
       erb :movies
     else
       @mov_name = params[:mov_name]
@@ -27,13 +30,15 @@ post "/movies_result" do
       @runtime = Movies.find_by_title(@mov_name).runtime
       @year = Movies.find_by_title(@mov_name).year
       suckr = ImageSuckr::GoogleSuckr.new 
-      @poster = suckr.get_image_url({"q" => @mov_name})
+      @poster = suckr.get_image_url({"q" => @mov_name + "movie"})
     end
   end
+  @current_page = "movies"
   erb :movies_result
 end
 
 get "/stocks" do
+  @current_page = "stocks"
   erb :stocks
 end
 
@@ -48,11 +53,12 @@ post "/stocks_result" do
   rescue
     "We could not find that stock quote, please try again."
   end
-
+  @current_page = "stocks"
   erb :stocks_result
 end
 
 get "/images" do
+  @current_page = "images"
   erb :images
 end
 
@@ -60,6 +66,7 @@ get "/images_result" do
     @img_name = params[:img_name]
     suckr = ImageSuckr::GoogleSuckr.new 
     @photo = suckr.get_image_url({"q" => @img_name})
+    @current_page = "images"
     erb :images_result
 end
 
@@ -71,3 +78,6 @@ post "/random_result" do
     @rand_photo = suckr.get_image_url({"q" => @img_random})
     erb :random_result
 end
+
+
+

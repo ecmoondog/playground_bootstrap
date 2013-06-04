@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="/style.css">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
 <head>
   <title>My Ruby Gems</title>
 </head>
 <body>
-  <h1>Welcome to the "Best Ruby Gems Portal"</h1>
-  <h2>Which of the following do you want to do?</h2>
-  <div class="option">
-    <ul>
-      <a href="movies"><li>Find info about a movie.</li></a>
-      <a href="stocks"><li>Find info about a stock.</li></a>
-      <a href="images"><li>Find an image.</li></a>
-    </ul>
+  <div id="banner_head">
+    <h1>Welcome to the "Best Ruby Gems Portal"</h1>
+    <h2>What do you want to find?</h2>
+    <div class="navbar row-fluid">
+    <div class="navbar-inner span6 offset3">
+      <ul class="nav nav-pills row-fluid">
+        <li class="span3 <%= "active" if @current_page == "/" %>"><a href="/">Home</a></li>
+        <li class="span3 <%= "active" if @current_page == "movies" %>"><a href="movies">Movies!</a></li>
+        <li class="span3 <%= "active" if @current_page == "stocks" %>"><a href="stocks">Stocks!</a></li>
+        <li class="span3 <%= "active" if @current_page == "images" %>"><a href="images">Images!</a></li>
+      </ul>
+    </div>
+  </div>
   </div>
   <div id="container">
    <%= yield %>

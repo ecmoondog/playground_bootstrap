@@ -1,12 +1,11 @@
-<h1>Welcome to the Images page!!</h1>
+<h2>What are you looking for?</h2>
 
-<form action="/images_result" method="get">
-  <input type="text" name="img_name">
-  <button>Show me the Image!</button>
+<form class="form-search" action="/images_result" method="get">
+  <input type="text" name="img_name" class="input-medium search-query">
+  <button type="submit" class="btn btn-info">Show me the Image!</button>
 </form>
 
 
-<form action="/random_result" method="post">
-  <input type="hidden" name="img_random" value="<%= @img_random %>">
-  <button>Show a random one instead!</button>
+<form class="form-search" action="/random_result" method="post">
+  <button type="submit" class="btn btn-info" name="img_random" value="<%= @img_random %>">Show a random one instead!</button>
 </form>
