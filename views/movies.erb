@@ -1,6 +1,7 @@
 <h2>Enter a Movie Name</h2>
+<p><%= @error %></p>
 
 <form class="form-search" action="/movies_result" method="post">
-  <input type="text" name="mov_name" class="input-medium search-query" placeholder="e.g. 'Momento'...">
+  <input type="text" name="mov_name" class="input-medium search-query" placeholder="e.g. 'Memento'...">
   <button type="submit" class="btn btn-info">Search!</button>
 </form>

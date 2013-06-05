@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require "movies"
 require "stock_quote"
 require "image_suckr"
-
+require "pry"
 get "/" do
   @current_page = "/"
   erb :index
@@ -15,26 +15,27 @@ get "/movies" do
 end
 
 post "/movies_result" do
+  @current_page = "movies"
   begin
-    movie = Movies.find_by_title(params[:mov_name])
-    if
-      movie.title.nil?
-      puts "This is not a valid movie"
-      @current_page = "movies"
+    movie = Movies.find_by_title(params[:mov_name], {tomatoes: "true"})
+    if movie.title.nil?
+      @error = "This is not a valid movie"
       erb :movies
     else
       @mov_name = params[:mov_name]
-      @title = Movies.find_by_title(@mov_name).title
-      @rating = Movies.find_by_title(@mov_name).rating #this is not yet working...
-      @director = Movies.find_by_title(@mov_name).director
-      @runtime = Movies.find_by_title(@mov_name).runtime
-      @year = Movies.find_by_title(@mov_name).year
+      @title = movie.title
+      @rating = movie.tomato.rating
+      @director = movie.director
+      @runtime = movie.runtime
+      @year = movie.year
       suckr = ImageSuckr::GoogleSuckr.new 
       @poster = suckr.get_image_url({"q" => @mov_name + "movie"})
+      erb :movies_result
     end
+  rescue
+    erb :movies
   end
-  @current_page = "movies"
-  erb :movies_result
+  
 end
 
 get "/stocks" do
