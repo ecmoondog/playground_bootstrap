@@ -1,4 +1,5 @@
 <h2>Enter a Stock Symbol</h2>
+<p><%= @error_stock %></p>
 
 <form class="form-search" action="/stocks_result" method="post">
   <input type="text" name="stock_name" class="input-medium search-query" placeholder="e.g. 'GOOG'...">

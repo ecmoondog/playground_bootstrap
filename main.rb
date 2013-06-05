@@ -33,6 +33,7 @@ post "/movies_result" do
       erb :movies_result
     end
   rescue
+    @error = "This is not a valid movie"
     erb :movies
   end
   
@@ -44,6 +45,7 @@ get "/stocks" do
 end
 
 post "/stocks_result" do
+  @current_page = "stocks"
   begin
     @stock_name = params[:stock_name]
     @company = StockQuote::Stock.quote(@stock_name).company
@@ -51,11 +53,11 @@ post "/stocks_result" do
     @last = StockQuote::Stock.quote(@stock_name).last
     @high = StockQuote::Stock.quote(@stock_name).high
     @low = StockQuote::Stock.quote(@stock_name).low
+    erb :stocks_result
   rescue
-    "We could not find that stock quote, please try again."
+    @error_stock = "We could not find that stock quote, please try again."
+    erb :stocks
   end
-  @current_page = "stocks"
-  erb :stocks_result
 end
 
 get "/images" do
@@ -64,14 +66,21 @@ get "/images" do
 end
 
 get "/images_result" do
+  @current_page = "images"
+  begin
     @img_name = params[:img_name]
     suckr = ImageSuckr::GoogleSuckr.new 
     @photo = suckr.get_image_url({"q" => @img_name})
     @current_page = "images"
     erb :images_result
+  rescue
+    @error_images = "We could not find that image, please try again."
+    erb :images
+  end
 end
 
 post "/random_result" do
+  @current_page = "images"
     params[:img_random]
     suckr = ImageSuckr::GoogleSuckr.new 
     arr = ["car", "dog", "cat", "lake", "jump", "hurdle", "skyscraper", "luge", "tree", "scatter", "artist", "paint"] 
